@@ -1,0 +1,501 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		082552042D861BDD0023C118 /* SHUtils in Frameworks */ = {isa = PBXBuildFile; productRef = 082552032D861BDD0023C118 /* SHUtils */; };
+		0825522D2D87354A0023C118 /* SHNavigation in Frameworks */ = {isa = PBXBuildFile; productRef = 0825522C2D87354A0023C118 /* SHNavigation */; };
+		0851881C2D70EC3600FC8C57 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 0851881B2D70EC3600FC8C57 /* FirebaseAnalytics */; };
+		0851881E2D70EC3600FC8C57 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 0851881D2D70EC3600FC8C57 /* FirebaseAuth */; };
+		085188202D70EC3600FC8C57 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 0851881F2D70EC3600FC8C57 /* FirebaseFirestore */; };
+		085188222D70EC3600FC8C57 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 085188212D70EC3600FC8C57 /* FirebaseStorage */; };
+		085188342D70F43F00FC8C57 /* FirebaseAuthPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 085188332D70F43F00FC8C57 /* FirebaseAuthPackage */; };
+		08779DD62D7106AB00E9966B /* ShroomHubDesignLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 08779DD52D7106AB00E9966B /* ShroomHubDesignLibrary */; };
+		0878781D2D97F79500742E40 /* CSRObjectCapture in Frameworks */ = {isa = PBXBuildFile; productRef = 0878781C2D97F79500742E40 /* CSRObjectCapture */; };
+		08B6379F2DA8D6F900446C1B /* CSRImageClassifier in Frameworks */ = {isa = PBXBuildFile; productRef = 08B6379E2DA8D6F900446C1B /* CSRImageClassifier */; };
+		08B637A22DA8D73D00446C1B /* CSRImageClassifier in Frameworks */ = {isa = PBXBuildFile; productRef = 08B637A12DA8D73D00446C1B /* CSRImageClassifier */; };
+		08B637CD2DA8D90100446C1B /* CSRImageClassifier in Frameworks */ = {isa = PBXBuildFile; productRef = 08B637CC2DA8D90100446C1B /* CSRImageClassifier */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0813F6952D95D27800401EB1 /* CSRObjectCapture */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CSRObjectCapture; path = /Users/catalinlucaciu/Documents/Work/Packages/CSRObjectCapture; sourceTree = "<absolute>"; };
+		082551FC2D85C4D50023C118 /* SHUtils */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SHUtils; path = /Users/catalinlucaciu/Documents/Work/Packages/SHUtils; sourceTree = "<absolute>"; };
+		082552292D8728620023C118 /* SHNavigation */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SHNavigation; path = /Users/catalinlucaciu/Documents/Work/Packages/SHNavigation; sourceTree = "<absolute>"; };
+		085C2B0E2D6E63F700D01124 /* ShroomHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShroomHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		0878781F2D97FA1500742E40 /* Exceptions for "ShroomHub" folder in "ShroomHub" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 085C2B0D2D6E63F700D01124 /* ShroomHub */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		085C2B102D6E63F700D01124 /* ShroomHub */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				0878781F2D97FA1500742E40 /* Exceptions for "ShroomHub" folder in "ShroomHub" target */,
+			);
+			path = ShroomHub;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		085C2B0B2D6E63F700D01124 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				082552042D861BDD0023C118 /* SHUtils in Frameworks */,
+				08779DD62D7106AB00E9966B /* ShroomHubDesignLibrary in Frameworks */,
+				0851881C2D70EC3600FC8C57 /* FirebaseAnalytics in Frameworks */,
+				085188222D70EC3600FC8C57 /* FirebaseStorage in Frameworks */,
+				085188342D70F43F00FC8C57 /* FirebaseAuthPackage in Frameworks */,
+				08B637A22DA8D73D00446C1B /* CSRImageClassifier in Frameworks */,
+				0851881E2D70EC3600FC8C57 /* FirebaseAuth in Frameworks */,
+				085188202D70EC3600FC8C57 /* FirebaseFirestore in Frameworks */,
+				0878781D2D97F79500742E40 /* CSRObjectCapture in Frameworks */,
+				08B6379F2DA8D6F900446C1B /* CSRImageClassifier in Frameworks */,
+				08B637CD2DA8D90100446C1B /* CSRImageClassifier in Frameworks */,
+				0825522D2D87354A0023C118 /* SHNavigation in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		082552282D8728450023C118 /* LocalPackages */ = {
+			isa = PBXGroup;
+			children = (
+				0813F6952D95D27800401EB1 /* CSRObjectCapture */,
+				082551FC2D85C4D50023C118 /* SHUtils */,
+				082552292D8728620023C118 /* SHNavigation */,
+			);
+			path = LocalPackages;
+			sourceTree = "<group>";
+		};
+		085C2B052D6E63F700D01124 = {
+			isa = PBXGroup;
+			children = (
+				082552282D8728450023C118 /* LocalPackages */,
+				085C2B102D6E63F700D01124 /* ShroomHub */,
+				085C2B0F2D6E63F700D01124 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		085C2B0F2D6E63F700D01124 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				085C2B0E2D6E63F700D01124 /* ShroomHub.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		085C2B0D2D6E63F700D01124 /* ShroomHub */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 085C2B1E2D6E63FA00D01124 /* Build configuration list for PBXNativeTarget "ShroomHub" */;
+			buildPhases = (
+				085C2B0A2D6E63F700D01124 /* Sources */,
+				085C2B0B2D6E63F700D01124 /* Frameworks */,
+				085C2B0C2D6E63F700D01124 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				085C2B102D6E63F700D01124 /* ShroomHub */,
+			);
+			name = ShroomHub;
+			packageProductDependencies = (
+				0851881B2D70EC3600FC8C57 /* FirebaseAnalytics */,
+				0851881D2D70EC3600FC8C57 /* FirebaseAuth */,
+				0851881F2D70EC3600FC8C57 /* FirebaseFirestore */,
+				085188212D70EC3600FC8C57 /* FirebaseStorage */,
+				085188332D70F43F00FC8C57 /* FirebaseAuthPackage */,
+				08779DD52D7106AB00E9966B /* ShroomHubDesignLibrary */,
+				082552032D861BDD0023C118 /* SHUtils */,
+				0825522C2D87354A0023C118 /* SHNavigation */,
+				0878781C2D97F79500742E40 /* CSRObjectCapture */,
+				08B6379E2DA8D6F900446C1B /* CSRImageClassifier */,
+				08B637A12DA8D73D00446C1B /* CSRImageClassifier */,
+				08B637CC2DA8D90100446C1B /* CSRImageClassifier */,
+			);
+			productName = ShroomHub;
+			productReference = 085C2B0E2D6E63F700D01124 /* ShroomHub.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		085C2B062D6E63F700D01124 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1620;
+				LastUpgradeCheck = 1620;
+				TargetAttributes = {
+					085C2B0D2D6E63F700D01124 = {
+						CreatedOnToolsVersion = 16.2;
+					};
+				};
+			};
+			buildConfigurationList = 085C2B092D6E63F700D01124 /* Build configuration list for PBXProject "ShroomHub" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 085C2B052D6E63F700D01124;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				0851881A2D70EC3600FC8C57 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				085188322D70F43F00FC8C57 /* XCLocalSwiftPackageReference "../../../Packages/FirebaseAuthPackage" */,
+				08779DD42D7106AB00E9966B /* XCLocalSwiftPackageReference "../../../Packages/ShroomHubDesignLibrary" */,
+				082552022D861BDD0023C118 /* XCLocalSwiftPackageReference "../../../Packages/SHUtils" */,
+				0825522B2D87354A0023C118 /* XCLocalSwiftPackageReference "../../../Packages/SHNavigation" */,
+				0878781B2D97F79500742E40 /* XCLocalSwiftPackageReference "../../../Packages/CSRObjectCapture" */,
+				08B637CB2DA8D90100446C1B /* XCLocalSwiftPackageReference "../../../Packages/CSRImageClassifier" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 085C2B0F2D6E63F700D01124 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				085C2B0D2D6E63F700D01124 /* ShroomHub */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		085C2B0C2D6E63F700D01124 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		085C2B0A2D6E63F700D01124 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		085C2B1C2D6E63FA00D01124 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		085C2B1D2D6E63FA00D01124 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		085C2B1F2D6E63FA00D01124 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"ShroomHub/Preview Content\"";
+				DEVELOPMENT_TEAM = 53ULM3K5HU;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ShroomHub/Info.plist;
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need access to your camera";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.LucaciuCatalin.ShroomHub;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		085C2B202D6E63FA00D01124 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"ShroomHub/Preview Content\"";
+				DEVELOPMENT_TEAM = 53ULM3K5HU;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ShroomHub/Info.plist;
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need access to your camera";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.LucaciuCatalin.ShroomHub;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		085C2B092D6E63F700D01124 /* Build configuration list for PBXProject "ShroomHub" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				085C2B1C2D6E63FA00D01124 /* Debug */,
+				085C2B1D2D6E63FA00D01124 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		085C2B1E2D6E63FA00D01124 /* Build configuration list for PBXNativeTarget "ShroomHub" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				085C2B1F2D6E63FA00D01124 /* Debug */,
+				085C2B202D6E63FA00D01124 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		082552022D861BDD0023C118 /* XCLocalSwiftPackageReference "../../../Packages/SHUtils" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../../../Packages/SHUtils;
+		};
+		0825522B2D87354A0023C118 /* XCLocalSwiftPackageReference "../../../Packages/SHNavigation" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../../../Packages/SHNavigation;
+		};
+		085188322D70F43F00FC8C57 /* XCLocalSwiftPackageReference "../../../Packages/FirebaseAuthPackage" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../../../Packages/FirebaseAuthPackage;
+		};
+		08779DD42D7106AB00E9966B /* XCLocalSwiftPackageReference "../../../Packages/ShroomHubDesignLibrary" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../../../Packages/ShroomHubDesignLibrary;
+		};
+		0878781B2D97F79500742E40 /* XCLocalSwiftPackageReference "../../../Packages/CSRObjectCapture" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../../../Packages/CSRObjectCapture;
+		};
+		08B637CB2DA8D90100446C1B /* XCLocalSwiftPackageReference "../../../Packages/CSRImageClassifier" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../../../Packages/CSRImageClassifier;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		0851881A2D70EC3600FC8C57 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.9.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		082552032D861BDD0023C118 /* SHUtils */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SHUtils;
+		};
+		0825522C2D87354A0023C118 /* SHNavigation */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SHNavigation;
+		};
+		0851881B2D70EC3600FC8C57 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0851881A2D70EC3600FC8C57 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		0851881D2D70EC3600FC8C57 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0851881A2D70EC3600FC8C57 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		0851881F2D70EC3600FC8C57 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0851881A2D70EC3600FC8C57 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		085188212D70EC3600FC8C57 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0851881A2D70EC3600FC8C57 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+		085188332D70F43F00FC8C57 /* FirebaseAuthPackage */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FirebaseAuthPackage;
+		};
+		08779DD52D7106AB00E9966B /* ShroomHubDesignLibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ShroomHubDesignLibrary;
+		};
+		0878781C2D97F79500742E40 /* CSRObjectCapture */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CSRObjectCapture;
+		};
+		08B6379E2DA8D6F900446C1B /* CSRImageClassifier */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CSRImageClassifier;
+		};
+		08B637A12DA8D73D00446C1B /* CSRImageClassifier */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CSRImageClassifier;
+		};
+		08B637CC2DA8D90100446C1B /* CSRImageClassifier */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CSRImageClassifier;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 085C2B062D6E63F700D01124 /* Project object */;
+}
