@@ -17,7 +17,7 @@ struct AuthenticationViewFactory {
     }
     
     @ViewBuilder
-    func makeView(for destination: NavigationRouter.Destination) -> some View {
+    func makeView(for destination: AppRootDestination) -> some View {
         switch destination {
         case .register:
             RegisterView(authManager: authManager)

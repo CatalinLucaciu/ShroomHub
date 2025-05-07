@@ -10,68 +10,74 @@ import SHNavigation
 import ShroomHubDesignLibrary
 
 struct DashboardView: View {
+    @EnvironmentObject private var navigationRouter: NavigationRouter
+    let homeViewFactory = HomeViewFactory()
+    let classificationViewFactory = ClassificationViewFactory()
+    let objectCaptureViewFactory = ObjectCaptureViewFactory()
+    let profileViewFactory = ProfileViewFactory()
     @State private var isShowingPopover = false
-
+    
     var body: some View {
         TabView() {
-            Tab(homeTitle,
-                systemImage: homeImage
+            Tab(SHTab.home.title,
+                systemImage: SHTab.home.systemImage
             ) {
-                HomeView()
+                makeTabContent(for: .home)
             }
-            Tab(cameraTitle,
-                systemImage: cameraImage
+            Tab(SHTab.classification.title,
+                systemImage: SHTab.classification.systemImage
             ) {
-                MushroomClasificationView()
+                makeTabContent(for: .classification)
             }
-            Tab(objectCaptureTitle,
-                systemImage: objectCaptureImage) {
-                MushroomCaptureView()
+            Tab(SHTab.objectCapture.title,
+                systemImage: SHTab.objectCapture.systemImage) {
+                makeTabContent(for: .objectCapture)
             }
-            Tab(profileTitle,
-                systemImage: profileImage
+            Tab(SHTab.profile.title,
+                systemImage: SHTab.profile.systemImage
             ) {
-                ProfileView()
+                makeTabContent(for: .profile)
             }
         }
     }
 }
 
-// MARK: - Strings
+// MARK: - Utils
 private extension DashboardView {
-    var homeTitle: String {
-        "Home"
-    }
-    
-    var cameraTitle: String {
-        "Camera"
-    }
-    
-    var profileTitle: String {
-        "Profile"
-    }
-    
-    var objectCaptureTitle: String {
-        "3D Map"
-    }
-    
-    var homeImage: String {
-        "house.fill"
-    }
-    
-    var cameraImage: String {
-        "camera.fill"
-    }
-    
-    var objectCaptureImage: String {
-        "cube.transparent"
-    }
-    
-    var profileImage: String {
-        "person.fill"
+    @ViewBuilder
+    func makeTabContent(for tab: SHTab) -> some View {
+        switch tab {
+        case .home:
+            NavigationStack(path: navigationRouter.path(for: .home)) {
+                HomeView()
+                    .navigationDestination(for: HomeTabDestination.self) { destination in
+                        homeViewFactory.makeView(for: destination)
+                    }
+            }
+        case .objectCapture:
+            NavigationStack(path: navigationRouter.path(for: .objectCapture)) {
+                MushroomCaptureView()
+                    .navigationDestination(for: ObjectCaptureTabDestination.self) { destination in
+                        objectCaptureViewFactory.makeView(for: destination)
+                    }
+            }
+        case .classification:
+            NavigationStack(path: navigationRouter.path(for: .classification)) {
+                MushroomClasificationView()
+                    .navigationDestination(for: ClassificationTabDestination.self) { destination in
+                        classificationViewFactory.makeView(for: destination)
+                    }
+            }
+        case .profile:
+            NavigationStack(path: navigationRouter.path(for: .profile)) {
+                ProfileView()
+                    .navigationDestination(for: ProfileTabDestination.self) { destination in
+                        profileViewFactory.makeView(for: destination)
+                    }
+            }
+        }
     }
 }
-
 
 #Preview {
     DashboardView()

@@ -41,7 +41,7 @@ struct LaunchScreen: View {
                 buttonsView
                     .padding(.bottom, Spacing.medium)
             }
-            .navigationDestination(for: NavigationRouter.Destination.self) { destination in
+            .navigationDestination(for: AppRootDestination.self) { destination in
                 authenticationViewFactory.makeView(for: destination)
             }
         }
@@ -58,12 +58,12 @@ private extension LaunchScreen {
     var buttonsView: some View {
         VStack(spacing: Spacing.small) {
             Button(registerButtonText) {
-                router.navigate(to: .register)
+                router.navigate(to: AppRootDestination.register)
             }
             .buttonStyle(SHMainButtonStyle(style: .primary))
             
             Button(loginButtonText) {
-                router.navigate(to: .login)
+                router.navigate(to: AppRootDestination.login)
             }
             .buttonStyle(SHMainButtonStyle(style: .secondary))
         }

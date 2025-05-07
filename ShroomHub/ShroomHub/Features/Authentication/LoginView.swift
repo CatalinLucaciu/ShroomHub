@@ -138,7 +138,7 @@ private extension LoginView {
                 await $loginState.load {
                     try await authManager.signIn(email: email,
                                        password: password)
-                    router.navigate(to: .dashboard)
+                    router.navigate(to: AppRootDestination.dashboard)
                 }
             }
         

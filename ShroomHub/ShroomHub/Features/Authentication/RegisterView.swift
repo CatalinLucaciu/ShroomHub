@@ -104,7 +104,7 @@ private extension RegisterView {
         HStack {
             Text(alreadyHaveAnAccount)
                 .font(.regular14)
-            NavigationLink(value: NavigationRouter.Destination.login) {
+            NavigationLink(value: AppRootDestination.login) {
                 Text(loginString)
                     .font(.bold14)
                     .foregroundStyle(SHColor.forestGreen)
@@ -140,7 +140,7 @@ private extension RegisterView {
                         password: password
                     )
                 }
-                router.navigate(to: .login)
+                router.navigate(to: AppRootDestination.login)
             }
     }
 }
