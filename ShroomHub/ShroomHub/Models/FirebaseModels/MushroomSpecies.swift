@@ -43,10 +43,10 @@ extension MushroomSpecies {
 
 extension MushroomSpecies {
     struct Morphology: Decodable, Hashable {
-        let cap: String
-        let gills: String
-        let stem: String
-        let flesh: String
+        let cap: String?
+        let gills: String?
+        let stem: String?
+        let flesh: String?
     }
 }
 

@@ -6,10 +6,22 @@
 //
 
 import SwiftUI
+import CSRLocationService
+import FirebaseAuthPackage
+import CSRNetworkService
 
 struct ClassificationViewFactory {
+    let appSession: any AppSessionProtocol
+    
     var mushroomService: MushroomSpeciesService {
-        MushroomSpeciesService()
+        MushroomSpeciesService(
+            networkService: NetworkService(),
+            locationProvder: locationService
+        )
+    }
+    
+    var locationService: CSRLocationService {
+        CSRLocationService()
     }
     
     @ViewBuilder
@@ -17,8 +29,8 @@ struct ClassificationViewFactory {
         switch destination {
         case .classification:
             Text("placeholder")
-        case let .speciesDetails(name):
-            speciesDetails(for: name)
+        case let .speciesDetails(classificationResult):
+            speciesDetails(for: classificationResult)
         }
     }
 }
@@ -26,8 +38,13 @@ struct ClassificationViewFactory {
 // MARK: - Views
 private extension ClassificationViewFactory {
     @ViewBuilder
-    func speciesDetails(for name: String) -> some View {
-        let viewModel = MushroomSpeciesViewModel(classificationName: name, service: mushroomService)
+    func speciesDetails(for classificationResult: MushroomClassificationResult) -> some View {
+        let viewModel = MushroomSpeciesViewModel(
+            classificationResult: classificationResult,
+            service: mushroomService,
+            locationService: locationService,
+            appSession: appSession
+        )
         MushroomSpeciesView(viewModel: viewModel)
     }
 }

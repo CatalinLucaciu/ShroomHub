@@ -4,6 +4,10 @@
 <dict>
 	<key>NSCamera</key>
 	<string></string>
+
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>This app needs your location to show relevant features near you.</string>
+
 	<key>UIFileSharingEnabled</key>
 	<true/>
 </dict>

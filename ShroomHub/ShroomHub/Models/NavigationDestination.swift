@@ -17,7 +17,7 @@ enum HomeTabDestination: Hashable {
 
 enum ClassificationTabDestination: Hashable {
     case classification
-    case speciesDetails(String)
+    case speciesDetails(MushroomClassificationResult)
 }
 
 enum ObjectCaptureTabDestination: Hashable {

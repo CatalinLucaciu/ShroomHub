@@ -8,11 +8,17 @@
 import SwiftUI
 import SHNavigation
 import ShroomHubDesignLibrary
+import FirebaseAuthPackage
+import CSRNetworkService
+import CSRLocationService
 
 struct DashboardView: View {
     @EnvironmentObject private var navigationRouter: NavigationRouter
+    @EnvironmentObject private var appSession: AppSession
     let homeViewFactory = HomeViewFactory()
-    let classificationViewFactory = ClassificationViewFactory()
+    var classificationViewFactory: ClassificationViewFactory {
+        ClassificationViewFactory(appSession: appSession)
+    }
     let objectCaptureViewFactory = ObjectCaptureViewFactory()
     let profileViewFactory = ProfileViewFactory()
     @State private var isShowingPopover = false
@@ -39,6 +45,7 @@ struct DashboardView: View {
                 makeTabContent(for: .profile)
             }
         }
+        .background(SHColor.mainBackground)
     }
 }
 
@@ -49,7 +56,8 @@ private extension DashboardView {
         switch tab {
         case .home:
             NavigationStack(path: navigationRouter.path(for: .home)) {
-                HomeView()
+                let viewModel = HomeViewModel(mushroomService: MushroomSpeciesService(networkService: NetworkService(), locationProvder: CSRLocationService()), appSession: appSession)
+                HomeView(viewModel: viewModel)
                     .navigationDestination(for: HomeTabDestination.self) { destination in
                         homeViewFactory.makeView(for: destination)
                     }
@@ -69,8 +77,9 @@ private extension DashboardView {
                     }
             }
         case .profile:
+            let viewModel = MushroomCollectionViewModel(service: MushroomSpeciesService(networkService: NetworkService(), locationProvder: CSRLocationService()), appSession: appSession)
             NavigationStack(path: navigationRouter.path(for: .profile)) {
-                ProfileView()
+                MushroomCollectionView(viewModel: viewModel)
                     .navigationDestination(for: ProfileTabDestination.self) { destination in
                         profileViewFactory.makeView(for: destination)
                     }

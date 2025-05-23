@@ -29,6 +29,7 @@ struct ShroomHubApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView(authenticationManager: authenticationManager)
+                .environmentObject(AppSession())
         }
         .modelContainer(sharedModelContainer)
     }

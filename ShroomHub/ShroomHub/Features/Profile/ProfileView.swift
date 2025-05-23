@@ -7,18 +7,22 @@
 
 import SwiftUI
 import FirebaseAuthPackage
+import CSRNetworkService
+import ShroomHubDesignLibrary
 
 struct ProfileView: View {
     let authenticator = FirebaseAuthenticator()
+    @EnvironmentObject var session: AppSession
+    @State var viewModel: MushroomCollectionViewModel
+    
     var body: some View {
-        Button("SignOut") {
-            Task {
-                try? await authenticator.signOut()
-            }
+        VStack {
+            MushroomCollectionView(viewModel: viewModel)
         }
+//        Button("SignOut") {
+//            Task {
+//                try? await authenticator.signOut()
+//            }
+//        }
     }
-}
-
-#Preview {
-    ProfileView()
 }

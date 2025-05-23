@@ -20,7 +20,6 @@ struct MushroomClasificationView: View {
     @EnvironmentObject private var navigationRouter: NavigationRouter
     @State private var classificationState: LoadableState<ClassificationResult, ClassificationError> = .idle
     let model = createImageClassifier()
-    let service = MushroomSpeciesService()
     var body: some View {
         content
             .onAppear {
@@ -55,18 +54,21 @@ private extension MushroomClasificationView {
             classificationState = .loading
             DispatchQueue.main.async {
                 // MARK: - TO DO: - Remove Mock
-                let mockedClassification = ClassificationResult(label: "Pluteus_cervinus", confidence: 1)
-                
-                navigationRouter.navigate(to: ClassificationTabDestination.speciesDetails(mockedClassification.label),
-                                          in: .classification)
-//                switch result {
-//                case let .success(classficationResult):
-//                    if let result = classficationResult.first {
-//                        classificationState = .loaded(result)
-//                    }
-//                case let .failure(error):
-//                    classificationState = .failure(error)
-//                }
+//                let mockedResult = ClassificationResult(label: "Pluteus_cervinus", confidence: 1)
+//                let mockedClassificationResult = MushroomClassificationResult(speciesName: mockedResult.label, image: UIImage())
+//                
+//                navigationRouter.navigate(to: ClassificationTabDestination.speciesDetails(mockedClassificationResult),
+//                                          in: .classification)
+                switch result {
+                case let .success(classficationResult):
+                    if let speciesName = classficationResult.results.first?.label {
+                        let mushroomClassificationResult = MushroomClassificationResult(speciesName: speciesName, image: classficationResult.image)
+                        navigationRouter.navigate(to: ClassificationTabDestination.speciesDetails(mushroomClassificationResult),
+                                                  in: .classification)
+                    }
+                case let .failure(error):
+                    classificationState = .failure(error)
+                }
             }
         }
     }

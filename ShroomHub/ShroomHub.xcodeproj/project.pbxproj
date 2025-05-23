@@ -21,6 +21,8 @@
 		08B6379F2DA8D6F900446C1B /* CSRImageClassifier in Frameworks */ = {isa = PBXBuildFile; productRef = 08B6379E2DA8D6F900446C1B /* CSRImageClassifier */; };
 		08B637A22DA8D73D00446C1B /* CSRImageClassifier in Frameworks */ = {isa = PBXBuildFile; productRef = 08B637A12DA8D73D00446C1B /* CSRImageClassifier */; };
 		08B637CD2DA8D90100446C1B /* CSRImageClassifier in Frameworks */ = {isa = PBXBuildFile; productRef = 08B637CC2DA8D90100446C1B /* CSRImageClassifier */; };
+		08E3C23C2DCD441A0077F59A /* CSRLocationService in Frameworks */ = {isa = PBXBuildFile; productRef = 08E3C23B2DCD441A0077F59A /* CSRLocationService */; };
+		08F9D7472DD24EFD00F8E8EC /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 08F9D7462DD24EFD00F8E8EC /* Lottie */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,7 @@
 		082551FC2D85C4D50023C118 /* SHUtils */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SHUtils; path = /Users/catalinlucaciu/Documents/Work/Packages/SHUtils; sourceTree = "<absolute>"; };
 		082552292D8728620023C118 /* SHNavigation */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SHNavigation; path = /Users/catalinlucaciu/Documents/Work/Packages/SHNavigation; sourceTree = "<absolute>"; };
 		085C2B0E2D6E63F700D01124 /* ShroomHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShroomHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		08E3C2392DCD326E0077F59A /* CSRLocationService */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CSRLocationService; path = /Users/catalinlucaciu/Documents/Work/Packages/CSRLocationService; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -61,7 +64,9 @@
 				08779DD62D7106AB00E9966B /* ShroomHubDesignLibrary in Frameworks */,
 				0851881C2D70EC3600FC8C57 /* FirebaseAnalytics in Frameworks */,
 				085188222D70EC3600FC8C57 /* FirebaseStorage in Frameworks */,
+				08E3C23C2DCD441A0077F59A /* CSRLocationService in Frameworks */,
 				08508E422DC1508A005506CD /* CSRNetworkService in Frameworks */,
+				08F9D7472DD24EFD00F8E8EC /* Lottie in Frameworks */,
 				085188342D70F43F00FC8C57 /* FirebaseAuthPackage in Frameworks */,
 				08B637A22DA8D73D00446C1B /* CSRImageClassifier in Frameworks */,
 				0851881E2D70EC3600FC8C57 /* FirebaseAuth in Frameworks */,
@@ -79,6 +84,7 @@
 		082552282D8728450023C118 /* LocalPackages */ = {
 			isa = PBXGroup;
 			children = (
+				08E3C2392DCD326E0077F59A /* CSRLocationService */,
 				0813F6952D95D27800401EB1 /* CSRObjectCapture */,
 				082551FC2D85C4D50023C118 /* SHUtils */,
 				082552292D8728620023C118 /* SHNavigation */,
@@ -137,6 +143,8 @@
 				08B637CC2DA8D90100446C1B /* CSRImageClassifier */,
 				08508E412DC1508A005506CD /* CSRNetworkService */,
 				081E76122DC2162B005A867D /* SDWebImageSwiftUI */,
+				08E3C23B2DCD441A0077F59A /* CSRLocationService */,
+				08F9D7462DD24EFD00F8E8EC /* Lottie */,
 			);
 			productName = ShroomHub;
 			productReference = 085C2B0E2D6E63F700D01124 /* ShroomHub.app */;
@@ -176,6 +184,8 @@
 				08B637CB2DA8D90100446C1B /* XCLocalSwiftPackageReference "../../../Packages/CSRImageClassifier" */,
 				08508E402DC1508A005506CD /* XCLocalSwiftPackageReference "../../../Packages/CSRNetworkService" */,
 				081E76112DC2162B005A867D /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+				08E3C23A2DCD441A0077F59A /* XCLocalSwiftPackageReference "../../../Packages/CSRLocationService" */,
+				08F9D7452DD24EFD00F8E8EC /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 085C2B0F2D6E63F700D01124 /* Products */;
@@ -335,7 +345,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ShroomHub/Preview Content\"";
-				DEVELOPMENT_TEAM = 53ULM3K5HU;
+				DEVELOPMENT_TEAM = BXPA3UA7G6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ShroomHub/Info.plist;
@@ -366,7 +376,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ShroomHub/Preview Content\"";
-				DEVELOPMENT_TEAM = 53ULM3K5HU;
+				DEVELOPMENT_TEAM = BXPA3UA7G6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ShroomHub/Info.plist;
@@ -441,6 +451,10 @@
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../../../Packages/CSRImageClassifier;
 		};
+		08E3C23A2DCD441A0077F59A /* XCLocalSwiftPackageReference "../../../Packages/CSRLocationService" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../../../Packages/CSRLocationService;
+		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCRemoteSwiftPackageReference section */
@@ -458,6 +472,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 11.9.0;
+			};
+		};
+		08F9D7452DD24EFD00F8E8EC /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -523,6 +545,15 @@
 		08B637CC2DA8D90100446C1B /* CSRImageClassifier */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = CSRImageClassifier;
+		};
+		08E3C23B2DCD441A0077F59A /* CSRLocationService */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CSRLocationService;
+		};
+		08F9D7462DD24EFD00F8E8EC /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 08F9D7452DD24EFD00F8E8EC /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

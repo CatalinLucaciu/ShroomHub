@@ -17,6 +17,10 @@ private enum Constants {
 public struct MushroomSpeciesView: View {
     @State private var viewModel: MushroomSpeciesViewModel
     @State private var isActionSheetPresented = false
+    @State private var postState: LoadableState<Void, Error> = .idle
+    @State private var saveState: LoadableState<Void, Error> = .idle
+    @State private var isMessageSheetPresented = false
+    @State private var selectedDetent: PresentationDetent = .medium
     
     init(viewModel: MushroomSpeciesViewModel) {
         self.viewModel = viewModel
@@ -37,7 +41,7 @@ public struct MushroomSpeciesView: View {
                 }
             }
         })
-        .navigationTitle(viewModel.classificationName)
+        .navigationTitle(screenTitle)
     }
 }
 
@@ -48,6 +52,10 @@ private extension MushroomSpeciesView {
     func content(for species: MushroomSpecies) -> some View {
         ScrollView() {
             VStack(spacing: Spacing.small) {
+                Image(uiImage: viewModel.classificationResult.image)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 200, height: 200)
                 photosSection(for: species.images)
                 namesSection(for: species)
                 edibilitySection(for: species.edibility)
@@ -62,13 +70,46 @@ private extension MushroomSpeciesView {
             .padding(.horizontal, Spacing.small)
             .padding(.vertical, Spacing.medium)
         }
+        .succesView(state: $postState,
+                    animationName: animationName,
+                    succesString: postSuccessMessage
+        )
+        .loadingView(state: saveState)
+        .loadingView(state: postState)
+        .alert(state: $postState)
         .scrollIndicators(.hidden)
-        .confirmationDialog("Details", isPresented: $isActionSheetPresented, titleVisibility: .visible, actions: {
+        .succesView(state: $saveState,
+                    animationName: animationName,
+                    succesString: saveSuccessMessage
+        )
+        .sheet(isPresented: $isMessageSheetPresented,
+               content: {
+            TextInputView { message in
+                Task {
+                    await $postState.load {
+                        try await viewModel.createMushroomPost(for: species, message: message)
+                    }
+                }
+            }
+            .presentationDetents([.medium], selection: $selectedDetent)
+            .presentationDragIndicator(.hidden)
+        })
+        .alert(state: $saveState)
+        .alert(state: $postState)
+        .confirmationDialog(
+            "Details",
+            isPresented: $isActionSheetPresented,
+            titleVisibility: .visible,
+            actions: {
             Button(postButtonTitle) {
-                viewModel.createMushroomPost(for: species)
+                isMessageSheetPresented.toggle()
             }
             Button(saveButtonTitle) {
-                viewModel.saveMushroom(for: species)
+                Task {
+                    await $saveState.load {
+                        try await viewModel.saveMushroom(for: species)
+                    }
+                }
             }
         })
     }
@@ -117,7 +158,7 @@ private extension MushroomSpeciesView {
             icon: .system(morphologySectionIcon)) {
                 LazyVStack(spacing: Spacing.small) {
                     ForEach(morphologySectionItems) { section in
-                        VStack {
+                        VStack(alignment: .leading) {
                             HStack(alignment: .top, spacing: Spacing.small) {
                                 Text(section.key)
                                     .font(.bold14)
@@ -271,6 +312,18 @@ private extension MushroomSpeciesView {
 
 // MARK: - Strings
 private extension MushroomSpeciesView {
+    var screenTitle: String {
+        viewModel.classificationResult.speciesName.replacingOccurrences(of: "_", with: " ")
+    }
+    
+    var saveSuccessMessage: String {
+        "Saved to your collection!"
+    }
+
+    var postSuccessMessage: String {
+        "Shared with the community!"
+    }
+    
     var imagesSectionTitle: String {
         "Photos"
     }
@@ -384,5 +437,12 @@ private extension MushroomSpeciesView {
     
     var noIcon: String {
         "x.square.fill"
+    }
+}
+
+// MARK: - Animation
+extension MushroomSpeciesView {
+    var animationName: String {
+        "mushroom_success_animation"
     }
 }

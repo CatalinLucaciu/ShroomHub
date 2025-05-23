@@ -6,13 +6,25 @@
 //
 
 import SwiftUI
+import ShroomHubDesignLibrary
 
 struct HomeView: View {
+    @State private var viewModel: HomeViewModel
+    
+    init(viewModel: HomeViewModel) {
+        self.viewModel = viewModel
+    }
+    
     var body: some View {
-        Text("Home")
+        AsyncView(task: viewModel.getFeed) { feed in
+            Text("musat")
+        }
     }
 }
 
-#Preview {
-    HomeView()
+// MARK: - Views
+private extension HomeView {
+    func content(for feed: [HomeFeedPost] ) {
+        
+    }
 }
