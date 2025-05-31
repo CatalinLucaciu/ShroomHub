@@ -8,19 +8,35 @@
 import SwiftUI
 import FirebaseAuthPackage
 import SHNavigation
+import CSRNetworkService
 
 struct AuthenticationViewFactory {
-    private let authManager: FirebaseAuthenticator
+    private let appSession: any AppSessionProtocol
     
-    init(authManager: FirebaseAuthenticator) {
-        self.authManager = authManager
+    init(appSession: any AppSessionProtocol) {
+        self.appSession = appSession
     }
     
+    var authManager: FirebaseAuthenticator {
+        FirebaseAuthenticator()
+    }
+    var networkService: NetworkService {
+        NetworkService()
+    }
+    var userService: UserService {
+        UserService(networkService: networkService)
+    }
+        
     @ViewBuilder
     func makeView(for destination: AppRootDestination) -> some View {
         switch destination {
         case .register:
-            RegisterView(authManager: authManager)
+            let viewModel = RegisterViewModel(
+                authManager: authManager,
+                userService: userService,
+                appSession: appSession
+            )
+            RegisterView(viewModel: viewModel)
         case .login:
             LoginView(authManager: authManager)
         case .dashboard:

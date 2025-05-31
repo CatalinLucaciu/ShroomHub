@@ -14,13 +14,13 @@ import FirebaseFirestore
 // MARK: - TO DO: do here call to see if authenticated and display spalshscreen meanwhile
 struct ContentView: View {
     @State private var isSplashScreenActive = true
-    private let authenticationManager: FirebaseAuthenticator
+    private let authenticationManager: FirebaseAuthenticating
     private var authentifcationViewFactory: AuthenticationViewFactory {
-        AuthenticationViewFactory(authManager: authenticationManager)
+        AuthenticationViewFactory(appSession: appSession)
     }
     @EnvironmentObject private var appSession: AppSession
     
-    init(authenticationManager: FirebaseAuthenticator) {
+    init(authenticationManager: FirebaseAuthenticating) {
         self.authenticationManager = authenticationManager
     }
     
@@ -29,7 +29,7 @@ struct ContentView: View {
             if isSplashScreenActive {
                 SplashScreen()
             } else {
-                if appSession.currentUser != nil {
+                if appSession.currentUser != nil && appSession.isUserCreationFinished {
                     DashboardView()
                         .environmentObject(NavigationRouter.shared)
                 } else {

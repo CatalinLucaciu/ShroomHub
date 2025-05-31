@@ -13,11 +13,12 @@ import SHNavigation
 
 struct LoginView: View {
     @EnvironmentObject private var router: NavigationRouter
+    @EnvironmentObject private var appSession: AppSession
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var isPasswordVisible: Bool = false
     @State private var loginState: LoadableState<Void, Error> = .idle
-    let authManager: FirebaseAuthenticator
+    let authManager: FirebaseAuthenticating
     
     var body: some View {
         VStack(alignment: .leading, spacing: Spacing.medium) {
@@ -32,6 +33,14 @@ struct LoginView: View {
             Spacer()
             loginButton
         }
+        .succesView(
+            state: $loginState,
+            animationName: animationName,
+            succesString: loginSuccesString,
+            completion: {
+                appSession.isUserCreationFinished = true
+                router.navigate(to: AppRootDestination.dashboard)
+            })
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.top, Spacing.medium)
         .padding(.horizontal, Spacing.medium)
@@ -135,10 +144,10 @@ private extension LoginView {
             },
             state: $loginState,
             style: .primary) {
+                appSession.isUserCreationFinished = false
                 await $loginState.load {
                     try await authManager.signIn(email: email,
                                        password: password)
-                    router.navigate(to: AppRootDestination.dashboard)
                 }
             }
         
@@ -169,6 +178,14 @@ private extension LoginView {
     
     var dividerString: String {
         "or"
+    }
+    
+    var animationName: String {
+        "mushroom_success_animation"
+    }
+    
+    var loginSuccesString: String {
+        "Welcome back, forager!"
     }
 }
 

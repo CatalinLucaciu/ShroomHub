@@ -10,14 +10,25 @@ import ShroomHubDesignLibrary
 import FirebaseAuthPackage
 import SHUtils
 import SHNavigation
+import CSRNetworkService
+import CSRImageClassifier
+
+private enum Constants {
+    static let imageSize: CGFloat = 70
+}
 
 struct RegisterView: View {
+    @State private var viewModel: RegisterViewModel
     @EnvironmentObject private var router: NavigationRouter
-    @State private var email: String = ""
-    @State private var password: String = ""
+    @EnvironmentObject private var appSession: AppSession
     @State private var isPasswordVisible: Bool = false
+    @State private var showCameraPicker: Bool = false
+    @State private var showPhotoLibraryPicker: Bool = false
     @State private var registerState: LoadableState<Void, Error> = .idle
-    let authManager: FirebaseAuthenticator
+    
+    init(viewModel: RegisterViewModel) {
+        self.viewModel = viewModel
+    }
     
     var body: some View {
         VStack(alignment: .leading, spacing: Spacing.medium) {
@@ -26,13 +37,32 @@ struct RegisterView: View {
             Text(subHeadear)
                 .font(.regular16)
             emailField
+            nameField
             passwordField
             loginShortcut
                 .frame(maxWidth: .infinity, alignment: .center)
-            divider
+            uploadAvatarImage
+                .frame(maxWidth: .infinity, alignment: .center)
             Spacer()
             signUpButton
         }
+        .succesView(
+            state: $registerState,
+            animationName: animationName,
+            succesString: registrationSuccesString,
+            completion: {
+                appSession.isUserCreationFinished = true
+            })
+        .sheet(isPresented: $showCameraPicker, content: {
+            CameraPicker { image, _, _ in
+                viewModel.setAvatarImageData(data: image.jpegData(compressionQuality: 0.8))
+            }
+        })
+        .sheet(isPresented: $showPhotoLibraryPicker, content: {
+            PhotoLibraryPicker { image in
+                viewModel.setAvatarImageData(data: image.jpegData(compressionQuality: 0.8))
+            }
+        })
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.top, Spacing.medium)
         .padding(.horizontal, Spacing.medium)
@@ -49,7 +79,7 @@ private extension RegisterView {
             HStack {
                 Image(systemName: "envelope")
                     .foregroundColor(SHColor.forestGreen)
-                TextField(text: $email) {
+                TextField(text: $viewModel.email) {
                     Text("Email")
                         .font(.bold14)
                         .foregroundStyle(SHColor.forestGreen)
@@ -57,6 +87,29 @@ private extension RegisterView {
                 .foregroundStyle(SHColor.forestGreen)
                 .autocapitalization(.none)
                 .keyboardType(.emailAddress)
+            }
+            .padding()
+            .background(SHColor.mistWhite)
+            .cornerRadius(CornerRadius.medium)
+        }
+    }
+    
+    @ViewBuilder
+    var nameField: some View {
+        VStack(alignment: .leading) {
+            Text("Name")
+                .font(.bold16)
+            HStack {
+                Image(systemName: "person")
+                    .foregroundColor(SHColor.forestGreen)
+                TextField(text: $viewModel.name) {
+                    Text("Name")
+                        .font(.bold14)
+                        .foregroundStyle(SHColor.forestGreen)
+                }
+                .foregroundStyle(SHColor.forestGreen)
+                .autocapitalization(.none)
+                .keyboardType(.default)
             }
             .padding()
             .background(SHColor.mistWhite)
@@ -73,13 +126,13 @@ private extension RegisterView {
                 Image(systemName: "lock")
                     .foregroundStyle(SHColor.forestGreen)
                 if isPasswordVisible {
-                    TextField(text: $password) {
+                    TextField(text: $viewModel.password) {
                         Text("Password")
                             .font(.bold14)
                             .foregroundStyle(SHColor.forestGreen)
                     }
                 } else {
-                    SecureField(text: $password) {
+                    SecureField(text: $viewModel.password) {
                         Text("Password")
                             .font(.bold14)
                             .foregroundStyle(SHColor.forestGreen)
@@ -133,15 +186,48 @@ private extension RegisterView {
                 Text(registerString)
             },
             state: $registerState,
-            style: .primary) {
+            style: .primary,
+            isDisabled: !viewModel.areFieldsCompleted) {
                 await $registerState.load {
-                    try await authManager.createUser(
-                        email: email,
-                        password: password
-                    )
+                    try await viewModel.createUser()
                 }
-                router.navigate(to: AppRootDestination.login)
             }
+    }
+    
+    @ViewBuilder
+    var uploadAvatarImage: some View {
+        VStack(alignment: .center, spacing: Spacing.medium) {
+            Text(profilePickInformative)
+                .font(.bold18)
+                .foregroundStyle(SHColor.forestGreen)
+            HStack(spacing: Spacing.medium) {
+                Button {
+                    showCameraPicker.toggle()
+                } label: {
+                    VStack {
+                        Image(systemName: "camera")
+                            .resizable()
+                            .frame(width: Constants.imageSize, height: Constants.imageSize)
+                        Text(cameraButtonTitle)
+                            .font(.regular14)
+                    }
+                }
+                .tint(SHColor.forestGreen)
+                
+                Button {
+                    showPhotoLibraryPicker.toggle()
+                } label: {
+                    VStack {
+                        Image(systemName: "photo.on.rectangle")
+                            .resizable()
+                            .frame(width: Constants.imageSize, height: Constants.imageSize)
+                        Text(photoLibraryButtonTitle)
+                            .font(.regular14)
+                    }
+                }
+                .tint(SHColor.forestGreen)
+            }
+        }
     }
 }
 
@@ -170,8 +256,29 @@ private extension RegisterView {
     var dividerString: String {
         "or"
     }
+    
+    var profilePickInformative: String {
+        "Upload Profile Picture"
+    }
+    
+    var cameraButtonTitle: String {
+        "Take Photo"
+    }
+    
+    var photoLibraryButtonTitle: String {
+        "Choose from Library"
+    }
+    
+    var animationName: String {
+        "mushroom_success_animation"
+    }
+    
+    var registrationSuccesString: String {
+        "Registration successful. Welcome aboard!"
+    }
 }
 
 #Preview {
-    RegisterView(authManager: FirebaseAuthenticator())
+    let viewModel = RegisterViewModel(authManager: FirebaseAuthenticator(), userService: UserService(networkService: NetworkService()), appSession: AppSession())
+    RegisterView(viewModel: viewModel)
 }

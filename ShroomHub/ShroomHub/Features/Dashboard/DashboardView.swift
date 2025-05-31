@@ -56,7 +56,8 @@ private extension DashboardView {
         switch tab {
         case .home:
             NavigationStack(path: navigationRouter.path(for: .home)) {
-                let viewModel = HomeViewModel(mushroomService: MushroomSpeciesService(networkService: NetworkService(), locationProvder: CSRLocationService()), appSession: appSession)
+                let networkService = NetworkService()
+                let viewModel = HomeViewModel(mushroomService: MushroomSpeciesService(networkService: networkService, locationProvder: CSRLocationService(), userService: UserService(networkService: networkService)), appSession: appSession)
                 HomeView(viewModel: viewModel)
                     .navigationDestination(for: HomeTabDestination.self) { destination in
                         homeViewFactory.makeView(for: destination)
@@ -77,9 +78,10 @@ private extension DashboardView {
                     }
             }
         case .profile:
-            let viewModel = MushroomCollectionViewModel(service: MushroomSpeciesService(networkService: NetworkService(), locationProvder: CSRLocationService()), appSession: appSession)
+            let viewModel = MushroomCollectionViewModel(service: MushroomSpeciesService(networkService: NetworkService(), locationProvder: CSRLocationService(), userService: UserService(networkService: NetworkService())), appSession: appSession)
             NavigationStack(path: navigationRouter.path(for: .profile)) {
-                MushroomCollectionView(viewModel: viewModel)
+//                MushroomCollectionView(viewModel: viewModel)
+                ProfileView()
                     .navigationDestination(for: ProfileTabDestination.self) { destination in
                         profileViewFactory.makeView(for: destination)
                     }

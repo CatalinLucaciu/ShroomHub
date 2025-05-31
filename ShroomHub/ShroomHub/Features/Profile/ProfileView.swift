@@ -12,17 +12,15 @@ import ShroomHubDesignLibrary
 
 struct ProfileView: View {
     let authenticator = FirebaseAuthenticator()
-    @EnvironmentObject var session: AppSession
-    @State var viewModel: MushroomCollectionViewModel
     
     var body: some View {
         VStack {
-            MushroomCollectionView(viewModel: viewModel)
+            Button("SignOut") {
+                Task {
+                    try? await authenticator.signOut()
+                }
+            }
         }
-//        Button("SignOut") {
-//            Task {
-//                try? await authenticator.signOut()
-//            }
-//        }
+
     }
 }

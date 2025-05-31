@@ -49,7 +49,7 @@ struct LaunchScreen: View {
 }
 
 #Preview {
-    LaunchScreen(authenticationViewFactory: AuthenticationViewFactory(authManager: FirebaseAuthenticator()))
+    LaunchScreen(authenticationViewFactory: AuthenticationViewFactory(appSession: AppSession()))
 }
 
 // MARK: - Views

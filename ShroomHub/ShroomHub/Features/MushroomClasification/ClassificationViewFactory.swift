@@ -15,9 +15,18 @@ struct ClassificationViewFactory {
     
     var mushroomService: MushroomSpeciesService {
         MushroomSpeciesService(
-            networkService: NetworkService(),
-            locationProvder: locationService
+            networkService: networkService,
+            locationProvder: locationService,
+            userService: userService
         )
+    }
+    
+    var userService: UserService {
+        UserService(networkService: networkService)
+    }
+    
+    var networkService: NetworkService {
+        NetworkService()
     }
     
     var locationService: CSRLocationService {

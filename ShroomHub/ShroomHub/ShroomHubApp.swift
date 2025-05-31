@@ -37,7 +37,7 @@ struct ShroomHubApp: App {
 
 // MARK: - Dependencies
 private extension ShroomHubApp {
-    private var authenticationManager: FirebaseAuthenticator {
+    private var authenticationManager: FirebaseAuthenticating {
         FirebaseAuthenticator()
     }
 }

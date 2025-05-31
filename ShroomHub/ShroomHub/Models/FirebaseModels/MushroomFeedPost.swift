@@ -17,3 +17,9 @@ struct MushroomFeedPost: Codable, Hashable {
     let commentCount: Int
     let timestamp: Int
 }
+
+extension MushroomFeedPost {
+    var formatedDateString: String {
+        Date(timeIntervalSince1970: TimeInterval(timestamp)).formattedAsRelativeOrAbsolute
+    }
+}

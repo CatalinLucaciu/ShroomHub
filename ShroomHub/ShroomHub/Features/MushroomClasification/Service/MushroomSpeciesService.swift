@@ -58,12 +58,15 @@ final class MushroomSpeciesService: MushroomServiceProtocol {
     private let db = Firestore.firestore()
     private let networkService: NetworkServiceProtocol
     private let locationProvider: LocationProviding
+    private let userService: UserServiceProtocol
     
     init(
         networkService: NetworkServiceProtocol,
-        locationProvder: LocationProviding) {
+        locationProvder: LocationProviding,
+        userService: UserServiceProtocol) {
         self.networkService = networkService
         self.locationProvider = locationProvder
+        self.userService = userService
     }
     
     func uploadMushroomPhoto(
@@ -209,14 +212,17 @@ private extension MushroomSpeciesService {
         try await withThrowingTaskGroup(of: HomeFeedPost.self) { group in
             for fireBasePost in fireBasePosts {
                 group.addTask {
-                    let finding = try await fireBasePost
+                    async let getFinding = try await fireBasePost
                         .findingReference
                         .getDocument(as: MushroomFinding.self)
+                    async let getUser = try await self.userService.getUserDetails(from: fireBasePost.userId)
+                    let (finding, userDetails) = try await (getFinding, getUser)
                     let (species, location) = try await self.fetchSpeciesAndLocation(from: finding)
                     return HomeFeedPost(
                         finding: finding,
                         postDetails: fireBasePost,
                         speciesDetails: species,
+                        userDetails: userDetails,
                         location: location?.address,
                         locationURL: location?.mapsURL
                     )

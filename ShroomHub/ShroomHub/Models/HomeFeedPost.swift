@@ -7,10 +7,13 @@
 
 import Foundation
 
-struct HomeFeedPost {
+struct HomeFeedPost: Identifiable {
+    let id: UUID = UUID()
     let finding: MushroomFinding
     let postDetails: MushroomFeedPost
     let speciesDetails: MushroomSpecies
+    let userDetails: FireBaseUser
     let location: String?
     let locationURL: URL?
 }
+
