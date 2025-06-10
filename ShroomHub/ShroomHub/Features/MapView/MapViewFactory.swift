@@ -10,7 +10,7 @@ import CSRLocationService
 import FirebaseAuthPackage
 import CSRNetworkService
 
-struct ClassificationViewFactory {
+struct MapViewFactory {
     let appSession: any AppSessionProtocol
     
     var mushroomService: MushroomSpeciesService {
@@ -34,7 +34,7 @@ struct ClassificationViewFactory {
     }
     
     @ViewBuilder
-    func makeView(for destination: ClassificationTabDestination) -> some View {
+    func makeView(for destination: MapTabDestination) -> some View {
         switch destination {
         case .classification:
             Text("placeholder")
@@ -45,7 +45,7 @@ struct ClassificationViewFactory {
 }
 
 // MARK: - Views
-private extension ClassificationViewFactory {
+private extension MapViewFactory {
     @ViewBuilder
     func speciesDetails(for classificationResult: MushroomClassificationResult) -> some View {
         let viewModel = MushroomSpeciesViewModel(

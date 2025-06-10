@@ -15,13 +15,14 @@ import CSRLocationService
 struct DashboardView: View {
     @EnvironmentObject private var navigationRouter: NavigationRouter
     @EnvironmentObject private var appSession: AppSession
-    let homeViewFactory = HomeViewFactory()
-    var classificationViewFactory: ClassificationViewFactory {
-        ClassificationViewFactory(appSession: appSession)
+    var homeViewFactory: HomeViewFactory {
+        HomeViewFactory(appSession: appSession)
+    }
+    var mapViewFactory: MapViewFactory {
+        MapViewFactory(appSession: appSession)
     }
     let objectCaptureViewFactory = ObjectCaptureViewFactory()
-    let profileViewFactory = ProfileViewFactory()
-    @State private var isShowingPopover = false
+    let collectionViewFactory = CollectionViewFactory()
     
     var body: some View {
         TabView() {
@@ -30,21 +31,22 @@ struct DashboardView: View {
             ) {
                 makeTabContent(for: .home)
             }
-            Tab(SHTab.classification.title,
-                systemImage: SHTab.classification.systemImage
-            ) {
-                makeTabContent(for: .classification)
-            }
             Tab(SHTab.objectCapture.title,
                 systemImage: SHTab.objectCapture.systemImage) {
                 makeTabContent(for: .objectCapture)
             }
-            Tab(SHTab.profile.title,
-                systemImage: SHTab.profile.systemImage
+            Tab(SHTab.map.title,
+                systemImage: SHTab.map.systemImage
             ) {
-                makeTabContent(for: .profile)
+                makeTabContent(for: .map)
+            }
+            Tab(SHTab.collection.title,
+                systemImage: SHTab.collection.systemImage
+            ) {
+                makeTabContent(for: .collection)
             }
         }
+        .tint(SHColor.forestGreen)
         .background(SHColor.mainBackground)
     }
 }
@@ -70,20 +72,21 @@ private extension DashboardView {
                         objectCaptureViewFactory.makeView(for: destination)
                     }
             }
-        case .classification:
-            NavigationStack(path: navigationRouter.path(for: .classification)) {
-                MushroomClasificationView()
-                    .navigationDestination(for: ClassificationTabDestination.self) { destination in
-                        classificationViewFactory.makeView(for: destination)
+        case .map:
+            NavigationStack(path: navigationRouter.path(for: .map)) {
+                let service = MushroomSpeciesService(networkService: NetworkService(), locationProvder: CSRLocationService(), userService: UserService(networkService: NetworkService()))
+                let viewModel = MushroomMapViewModel(service: service, locationService: CSRLocationService())
+                MushroomMapView(viewModel: viewModel)
+                    .navigationDestination(for: MapTabDestination.self) { destination in
+                        mapViewFactory.makeView(for: destination)
                     }
             }
-        case .profile:
+        case .collection:
             let viewModel = MushroomCollectionViewModel(service: MushroomSpeciesService(networkService: NetworkService(), locationProvder: CSRLocationService(), userService: UserService(networkService: NetworkService())), appSession: appSession)
-            NavigationStack(path: navigationRouter.path(for: .profile)) {
-//                MushroomCollectionView(viewModel: viewModel)
-                ProfileView()
-                    .navigationDestination(for: ProfileTabDestination.self) { destination in
-                        profileViewFactory.makeView(for: destination)
+            NavigationStack(path: navigationRouter.path(for: .collection)) {
+                MushroomCollectionView(viewModel: viewModel)
+                    .navigationDestination(for: CollectionTabDestination.self) { destination in
+                        collectionViewFactory.makeView(for: destination)
                     }
             }
         }

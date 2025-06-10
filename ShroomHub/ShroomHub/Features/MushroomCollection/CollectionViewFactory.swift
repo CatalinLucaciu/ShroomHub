@@ -1,5 +1,5 @@
 //
-//  ProfileViewFactory.swift
+//  CollectionViewFactory.swift
 //  ShroomHub
 //
 //  Created by Catalin Lucaciu on 27.04.2025.
@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct ProfileViewFactory {
+struct CollectionViewFactory {
     @ViewBuilder
-    func makeView(for destination: ProfileTabDestination) -> some View {
+    func makeView(for destination: CollectionTabDestination) -> some View {
         switch destination {
         case .profile:
             Text("placeholder")

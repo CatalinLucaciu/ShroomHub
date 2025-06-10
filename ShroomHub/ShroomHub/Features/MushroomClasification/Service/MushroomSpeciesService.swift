@@ -51,6 +51,7 @@ protocol MushroomServiceProtocol {
         message: String
     ) async throws
     func getMushroomCollection(for userId: String) async throws -> [CollectedMushroom]
+    func getAllCollectedMushrooms() async throws -> [CollectedMushroom]
     func getFeed(except userId: String) async throws -> [HomeFeedPost]
 }
 
@@ -159,6 +160,19 @@ extension MushroomSpeciesService {
     }
 }
 
+// MARK: - Get Findings
+extension MushroomSpeciesService {
+    func getAllCollectedMushrooms() async throws -> [CollectedMushroom] {
+        let snapShot = try await db
+            .collection(Constants.findingsCollectionName)
+            .getDocuments()
+        let findings = try snapShot.documents.map {
+            try $0.data(as: MushroomFinding.self)
+        }
+        return try await mapCollectedMushrooms(from: findings)
+    }
+}
+
 // MARK: - Utils
 private extension MushroomSpeciesService {
     func uploadFindingIfNecessary(_ finding: MushroomFinding) async throws {
@@ -181,27 +195,35 @@ private extension MushroomSpeciesService {
             }
     }
     
-    func fetchSpeciesAndLocation(from finding: MushroomFinding) async throws -> (MushroomSpecies, ReverseGeocodedLocation?) {
-        async let fetchSpecies = try await finding
+    func fetchSpecies(from finding: MushroomFinding) async throws -> MushroomSpecies {
+        try await finding
             .speciesReference
             .getDocument(as: MushroomSpecies.self)
-        async let fetchLocation = await self.locationProvider.reverseGeoCode(
-            latitude: finding.location.latitude,
-            longitude: finding.location.longitude
-        )
-        return try await (fetchSpecies, fetchLocation)
+    }
+    
+    func fetchLocation(from finding: MushroomFinding) async throws -> ReverseGeocodedLocation? {
+        await self.locationProvider.reverseGeoCode(
+           latitude: finding.location.latitude,
+           longitude: finding.location.longitude
+       )
+    }
+    
+    func getCollectedMushroom(from finding: MushroomFinding) async throws -> CollectedMushroom {
+        async let getSpecies = try await self.fetchSpecies(from: finding)
+        async let getLocation = try await self.fetchLocation(from: finding)
+        let (species, location) = try await (getSpecies, getLocation)
+        return CollectedMushroom(
+            record: finding,
+            species: species,
+            location: location?.address,
+            locationURL: location?.mapsURL)
     }
 
     func mapCollectedMushrooms(from findings: [MushroomFinding]) async throws -> [CollectedMushroom] {
         try await withThrowingTaskGroup(of: CollectedMushroom.self) { group in
             for finding in findings {
                 group.addTask {
-                    let (species, location) = try await self.fetchSpeciesAndLocation(from: finding)
-                    return CollectedMushroom(
-                        record: finding,
-                        species: species,
-                        location: location?.address,
-                        locationURL: location?.mapsURL)
+                    try await self.getCollectedMushroom(from: finding)
                 }
             }
             return try await group.reduce(into: []) { $0.append($1) }
@@ -217,14 +239,11 @@ private extension MushroomSpeciesService {
                         .getDocument(as: MushroomFinding.self)
                     async let getUser = try await self.userService.getUserDetails(from: fireBasePost.userId)
                     let (finding, userDetails) = try await (getFinding, getUser)
-                    let (species, location) = try await self.fetchSpeciesAndLocation(from: finding)
+                    let collectedMushroom = try await self.getCollectedMushroom(from: finding)
                     return HomeFeedPost(
-                        finding: finding,
+                        collectedMushroom: collectedMushroom,
                         postDetails: fireBasePost,
-                        speciesDetails: species,
-                        userDetails: userDetails,
-                        location: location?.address,
-                        locationURL: location?.mapsURL
+                        userDetails: userDetails
                     )
                 }
             }

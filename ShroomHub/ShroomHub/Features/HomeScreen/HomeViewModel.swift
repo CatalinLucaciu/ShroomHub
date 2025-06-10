@@ -22,6 +22,6 @@ final class HomeViewModel {
     }
     
     func getFeed() async throws -> [HomeFeedPost] {
-        try await mushroomService.getFeed(except: "musat")
+        try await mushroomService.getFeed(except: appSession.currentUser?.id ?? "")
     }
 }

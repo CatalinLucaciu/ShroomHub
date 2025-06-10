@@ -5,6 +5,8 @@
 //  Created by Catalin Lucaciu on 27.04.2025.
 //
 
+import CSRImageClassifier
+
 enum AppRootDestination: Hashable {
     case login
     case register
@@ -13,9 +15,12 @@ enum AppRootDestination: Hashable {
 
 enum HomeTabDestination: Hashable {
     case homeScreen
+    case classification(ClassificationImageSource)
+    case speciesDetails(MushroomClassificationResult)
+    case profile
 }
 
-enum ClassificationTabDestination: Hashable {
+enum MapTabDestination: Hashable {
     case classification
     case speciesDetails(MushroomClassificationResult)
 }
@@ -24,6 +29,6 @@ enum ObjectCaptureTabDestination: Hashable {
     case objectCapture
 }
 
-enum ProfileTabDestination: Hashable {
+enum CollectionTabDestination: Hashable {
     case profile
 }

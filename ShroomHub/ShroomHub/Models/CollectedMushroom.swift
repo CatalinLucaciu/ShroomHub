@@ -6,8 +6,9 @@
 //
 
 import Foundation
+import MapKit
 
-struct CollectedMushroom: Identifiable {
+struct CollectedMushroom: Identifiable, Hashable {
     var id = UUID()
     let record: MushroomFinding
     let species: MushroomSpecies

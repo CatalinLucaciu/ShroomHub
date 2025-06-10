@@ -95,9 +95,9 @@
 		085C2B052D6E63F700D01124 = {
 			isa = PBXGroup;
 			children = (
+				085C2B102D6E63F700D01124 /* ShroomHub */,
 				082552282D8728450023C118 /* LocalPackages */,
 				085C2B0F2D6E63F700D01124 /* Products */,
-				085C2B102D6E63F700D01124 /* ShroomHub */,
 			);
 			sourceTree = "<group>";
 		};

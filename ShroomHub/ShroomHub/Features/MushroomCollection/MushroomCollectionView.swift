@@ -13,6 +13,7 @@ import SHUtils
 struct MushroomCollectionView: View {
     @State private var viewModel: MushroomCollectionViewModel
     @State private var reverseLocationState: LoadableState<ReverseGeocodedLocation?, Error> = .idle
+    @State private var selectedMushroom: CollectedMushroom?
     
     init(viewModel: MushroomCollectionViewModel) {
         self.viewModel = viewModel
@@ -21,6 +22,12 @@ struct MushroomCollectionView: View {
     var body: some View {
         AsyncView(task: viewModel.getSavedMushrooms) { collection in
             content(for: collection)
+        }
+        .sheet(item: $selectedMushroom) { mushroom in
+            MushroomSpeciesDetailsView(mushroomSpecies: mushroom.species,
+                                       mushroomFinding: mushroom.record,
+                                       location: mushroom.location,
+                                       locationURL: mushroom.locationURL)
         }
         .navigationTitle(screenTitle)
         .navigationBarTitleDisplayMode(.inline)
@@ -50,15 +57,19 @@ private extension MushroomCollectionView {
     func collectedMushroom(for collectedMushroom: CollectedMushroom) -> some View {
         let record = collectedMushroom.record
         let species = collectedMushroom.species
-        let imageURL = URL(string: record.imageUrl) // sa-l bag la loc
+        let imageURL = URL(string: record.imageUrl)
         let configuration = MushroomFindingCell.Configuration.init(
-            image: .remote(nil), // aici
+            image: .remote(imageURL), // aici daca vreau mock
             title: species.commonNames.first ?? species.scientificName,
             subtitle: species.scientificName,
             preFooter: collectedMushroom.location ?? "",
-            footer: Date(timeIntervalSince1970: TimeInterval(record.timestamp)).description,
+            footer: Date(timeIntervalSince1970: TimeInterval(record.timestamp))
+                .formatted(.dateTime.month().day().hour().minute()),
             preFooterImage: locationSystemImage,
-            footerImage: calendarSystemImage
+            footerImage: calendarSystemImage,
+            action: {
+                selectedMushroom = collectedMushroom
+            }
         )
         MushroomFindingCell(configuration: configuration)
     }

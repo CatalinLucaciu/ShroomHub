@@ -19,12 +19,22 @@ private enum Constants {
 struct MushroomClasificationView: View {
     @EnvironmentObject private var navigationRouter: NavigationRouter
     @State private var classificationState: LoadableState<ClassificationResult, ClassificationError> = .idle
+    private let imageSource: ClassificationImageSource
+    
+    init(imageSource: ClassificationImageSource) {
+        self.imageSource = imageSource
+    }
+    
     let model = createImageClassifier()
     var body: some View {
         content
             .onAppear {
                 classificationState = .idle
             }
+            .navigationTitle(screenTitle)
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar(.hidden, for: .tabBar)
+        
     }
 }
 
@@ -50,7 +60,8 @@ private extension MushroomClasificationView {
     
     @ViewBuilder
     var imageClassifier: some View {
-        CSRImageClassifierView(model: model) { result in
+        CSRImageClassifierView(model: model,
+                               imageSource: imageSource) { result in
             classificationState = .loading
             DispatchQueue.main.async {
                 // MARK: - TO DO: - Remove Mock
@@ -63,8 +74,8 @@ private extension MushroomClasificationView {
                 case let .success(classficationResult):
                     if let speciesName = classficationResult.results.first?.label {
                         let mushroomClassificationResult = MushroomClassificationResult(speciesName: speciesName, image: classficationResult.image)
-                        navigationRouter.navigate(to: ClassificationTabDestination.speciesDetails(mushroomClassificationResult),
-                                                  in: .classification)
+                        navigationRouter.navigate(to: HomeTabDestination.speciesDetails(mushroomClassificationResult),
+                                                  in: .home)
                     }
                 case let .failure(error):
                     classificationState = .failure(error)
@@ -101,5 +112,11 @@ private extension MushroomClasificationView {
 
 
         return imageClassifierVisionModel
+    }
+}
+
+private extension MushroomClasificationView {
+    var screenTitle: String {
+        "Mushroom Classification"
     }
 }
