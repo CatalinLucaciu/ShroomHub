@@ -9,6 +9,7 @@ import SwiftUI
 import ShroomHubDesignLibrary
 import SHNavigation
 import CSRImageClassifier
+import SHUtils
 
 private enum Constants {
     static let imageSize: CGFloat = 25
@@ -21,6 +22,7 @@ struct HomeView: View {
     @State private var shouldShowImageSourceSelection = false
     @State private var selectedImageSource: ClassificationImageSource?
     @State private var isMenuPresented = false
+    @State private var state: LoadableState<[HomeFeedPost], Error> = .idle
     
     init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
@@ -87,15 +89,22 @@ private extension HomeView {
     }
     
     var mainContent: some View {
-        AsyncView(task: viewModel.getFeed) { posts in
-            ScrollView {
-                VStack(spacing: Spacing.small) {
-                    ForEach(posts) { post in
-                        postView(for: post)
+        AsyncView(
+            $state,
+            task: viewModel.getFeed) { posts in
+                if let posts {
+                    ScrollView {
+                        VStack(spacing: Spacing.small) {
+                            ForEach(posts) { post in
+                                postView(for: post)
+                            }
+                        }
                     }
                 }
             }
-        }
+            .onAppear {
+                state = .idle
+            }
     }
     
     func content(for posts: [HomeFeedPost] ) -> some View {

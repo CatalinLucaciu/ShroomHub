@@ -14,15 +14,23 @@ struct MushroomCollectionView: View {
     @State private var viewModel: MushroomCollectionViewModel
     @State private var reverseLocationState: LoadableState<ReverseGeocodedLocation?, Error> = .idle
     @State private var selectedMushroom: CollectedMushroom?
+    @State private var state: LoadableState<[CollectedMushroom], Error> = .idle
     
     init(viewModel: MushroomCollectionViewModel) {
         self.viewModel = viewModel
     }
     
     var body: some View {
-        AsyncView(task: viewModel.getSavedMushrooms) { collection in
-            content(for: collection)
+        AsyncView(
+            $state,
+            task: viewModel.getSavedMushrooms) { collection in
+                if let collection {
+                    content(for: collection)
+                }
         }
+            .onAppear {
+                state = .idle
+            }
         .sheet(item: $selectedMushroom) { mushroom in
             MushroomSpeciesDetailsView(mushroomSpecies: mushroom.species,
                                        mushroomFinding: mushroom.record,

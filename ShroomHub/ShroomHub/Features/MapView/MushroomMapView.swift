@@ -15,15 +15,23 @@ struct MushroomMapView: View {
     @State private var viewModel: MushroomMapViewModel
     @State private var selectedMapItem: MKMapItem?
     @State private var selectedMushroom: CollectedMushroom?
+    @State private var state: LoadableState<[CollectedMushroom], Error> = .idle
     
     init(viewModel: MushroomMapViewModel) {
         self.viewModel = viewModel
     }
     
     var body: some View {
-        AsyncView(task: viewModel.getCollectedMushrooms) { mushrooms in
-            content(for: mushrooms)
+        AsyncView(
+            $state,
+            task: viewModel.getCollectedMushrooms) { mushrooms in
+                if let mushrooms {
+                    content(for: mushrooms)
+                }
         }
+            .onAppear {
+                state = .idle
+            }
         .sheet(item: $selectedMushroom) { mushroom in
             MushroomSpeciesDetailsView(mushroomSpecies: mushroom.species, mushroomFinding: mushroom.record)
         }
